@@ -16,7 +16,7 @@ trait ThrottlesLogins
      */
     protected function hasTooManyLoginAttempts(Request $request)
     {
-        return app(RateLimiter::class)->tooManyAttempts(
+        return app('Illuminate\Cache\RateLimiter')->tooManyAttempts(
             $request->input($this->loginUsername()).$request->ip(),
             $this->maxLoginAttempts(), $this->lockoutTime() / 60
         );
@@ -30,7 +30,7 @@ trait ThrottlesLogins
      */
     protected function incrementLoginAttempts(Request $request)
     {
-        app(RateLimiter::class)->hit(
+        app('Illuminate\Cache\RateLimiter')->hit(
             $request->input($this->loginUsername()).$request->ip()
         );
     }
@@ -43,7 +43,7 @@ trait ThrottlesLogins
      */
     protected function retriesLeft(Request $request)
     {
-        $attempts = app(RateLimiter::class)->attempts(
+        $attempts = app('Illuminate\Cache\RateLimiter')->attempts(
             $request->input($this->loginUsername()).$request->ip()
         );
 
@@ -58,7 +58,7 @@ trait ThrottlesLogins
      */
     protected function sendLockoutResponse(Request $request)
     {
-        $seconds = app(RateLimiter::class)->availableIn(
+        $seconds = app('Illuminate\Cache\RateLimiter')->availableIn(
             $request->input($this->loginUsername()).$request->ip()
         );
 
@@ -90,7 +90,7 @@ trait ThrottlesLogins
      */
     protected function clearLoginAttempts(Request $request)
     {
-        app(RateLimiter::class)->clear(
+        app('Illuminate\Cache\RateLimiter')->clear(
             $request->input($this->loginUsername()).$request->ip()
         );
     }

@@ -267,7 +267,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $relation->shouldReceive('get')->once()->andReturn(new Illuminate\Database\Eloquent\Collection([new StdClass]));
         $relation->shouldReceive('take')->with(1)->once()->andReturn($relation);
 
-        $this->assertInstanceOf(StdClass::class, $relation->first());
+        $this->assertInstanceOf('StdClass', $relation->first());
     }
 
     public function testFindMethod()
@@ -279,7 +279,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $related = $relation->getRelated();
         $related->shouldReceive('getQualifiedKeyName')->once()->andReturn('roles.id');
 
-        $this->assertInstanceOf(StdClass::class, $relation->find('foo'));
+        $this->assertInstanceOf('StdClass', $relation->find('foo'));
     }
 
     public function testFindManyMethod()
@@ -294,7 +294,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $result = $relation->findMany(['foo', 'bar']);
 
         $this->assertEquals(2, count($result));
-        $this->assertInstanceOf(StdClass::class, $result->first());
+        $this->assertInstanceOf('StdClass', $result->first());
     }
 
     public function testCreateMethodCreatesNewModelAndInsertsAttachmentRecord()
@@ -314,7 +314,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $relation->expects($this->once())->method('find')->with('foo')->will($this->returnValue($model = m::mock('StdClass')));
         $relation->getRelated()->shouldReceive('newInstance')->never();
 
-        $this->assertInstanceOf(StdClass::class, $relation->findOrNew('foo'));
+        $this->assertInstanceOf('StdClass', $relation->findOrNew('foo'));
     }
 
     public function testFindOrNewMethodReturnsNewModel()
@@ -323,7 +323,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $relation->expects($this->once())->method('find')->with('foo')->will($this->returnValue(null));
         $relation->getRelated()->shouldReceive('newInstance')->once()->andReturn($model = m::mock('StdClass'));
 
-        $this->assertInstanceOf(StdClass::class, $relation->findOrNew('foo'));
+        $this->assertInstanceOf('StdClass', $relation->findOrNew('foo'));
     }
 
     public function testFirstOrNewMethodFindsFirstModel()
@@ -333,7 +333,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $relation->getQuery()->shouldReceive('first')->once()->andReturn($model = m::mock('StdClass'));
         $relation->getRelated()->shouldReceive('newInstance')->never();
 
-        $this->assertInstanceOf(StdClass::class, $relation->firstOrNew(['foo']));
+        $this->assertInstanceOf('StdClass', $relation->firstOrNew(['foo']));
     }
 
     public function testFirstOrNewMethodReturnsNewModel()
@@ -343,7 +343,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $relation->getQuery()->shouldReceive('first')->once()->andReturn(null);
         $relation->getRelated()->shouldReceive('newInstance')->once()->andReturn($model = m::mock('StdClass'));
 
-        $this->assertInstanceOf(StdClass::class, $relation->firstOrNew(['foo']));
+        $this->assertInstanceOf('StdClass', $relation->firstOrNew(['foo']));
     }
 
     public function testFirstOrCreateMethodFindsFirstModel()
@@ -353,7 +353,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $relation->getQuery()->shouldReceive('first')->once()->andReturn($model = m::mock('StdClass'));
         $relation->expects($this->never())->method('create')->with(['foo'])->will($this->returnValue(null));
 
-        $this->assertInstanceOf(StdClass::class, $relation->firstOrCreate(['foo']));
+        $this->assertInstanceOf('StdClass', $relation->firstOrCreate(['foo']));
     }
 
     public function testFirstOrCreateMethodReturnsNewModel()
@@ -363,7 +363,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $relation->getQuery()->shouldReceive('first')->once()->andReturn(null);
         $relation->expects($this->once())->method('create')->with(['foo'])->will($this->returnValue($model = m::mock('StdClass')));
 
-        $this->assertInstanceOf(StdClass::class, $relation->firstOrCreate(['foo']));
+        $this->assertInstanceOf('StdClass', $relation->firstOrCreate(['foo']));
     }
 
     public function testUpdateOrCreateMethodFindsFirstModelAndUpdates()
@@ -375,7 +375,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $model->shouldReceive('save')->once();
         $relation->expects($this->never())->method('create')->with(['foo'])->will($this->returnValue(null));
 
-        $this->assertInstanceOf(StdClass::class, $relation->updateOrCreate(['foo']));
+        $this->assertInstanceOf('StdClass', $relation->updateOrCreate(['foo']));
     }
 
     public function testUpdateOrCreateMethodReturnsNewModel()
@@ -385,7 +385,7 @@ class DatabaseEloquentBelongsToManyTest extends PHPUnit_Framework_TestCase
         $relation->getQuery()->shouldReceive('first')->once()->andReturn(null);
         $relation->expects($this->once())->method('create')->with(['foo'])->will($this->returnValue($model = m::mock('StdClass')));
 
-        $this->assertInstanceOf(StdClass::class, $relation->updateOrCreate(['bar'], ['foo']));
+        $this->assertInstanceOf('StdClass', $relation->updateOrCreate(['bar'], ['foo']));
     }
 
     /**

@@ -73,7 +73,7 @@ class FormRequest extends Request implements ValidatesWhenResolved
      */
     protected function getValidatorInstance()
     {
-        $factory = $this->container->make(ValidationFactory::class);
+        $factory = $this->container->make('Illuminate\Contracts\Validation\ValidationFactory');
 
         if (method_exists($this, 'validator')) {
             return $this->container->call([$this, 'validator'], compact('factory'));

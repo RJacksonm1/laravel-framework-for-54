@@ -20,7 +20,7 @@ class FoundationAuthorizesRequestsTraitTest extends PHPUnit_Framework_TestCase
 
         $response = (new FoundationTestAuthorizeTraitClass)->authorize('foo');
 
-        $this->assertInstanceOf(Response::class, $response);
+        $this->assertInstanceOf('Illuminate\Auth\Access\Response', $response);
         $this->assertTrue($_SERVER['_test.authorizes.trait']);
     }
 
@@ -44,11 +44,11 @@ class FoundationAuthorizesRequestsTraitTest extends PHPUnit_Framework_TestCase
 
         $gate = $this->getBasicGate();
 
-        $gate->policy(FoundationAuthorizesRequestTestClass::class, FoundationAuthorizesRequestTestPolicy::class);
+        $gate->policy('FoundationAuthorizesRequestTestClass', 'FoundationAuthorizesRequestTestPolicy');
 
         $response = (new FoundationTestAuthorizeTraitClass)->authorize('update', new FoundationAuthorizesRequestTestClass);
 
-        $this->assertInstanceOf(Response::class, $response);
+        $this->assertInstanceOf('Illuminate\Auth\Access\Response', $response);
         $this->assertTrue($_SERVER['_test.authorizes.trait.policy']);
     }
 
@@ -58,11 +58,11 @@ class FoundationAuthorizesRequestsTraitTest extends PHPUnit_Framework_TestCase
 
         $gate = $this->getBasicGate();
 
-        $gate->policy(FoundationAuthorizesRequestTestClass::class, FoundationAuthorizesRequestTestPolicy::class);
+        $gate->policy('FoundationAuthorizesRequestTestClass', 'FoundationAuthorizesRequestTestPolicy');
 
         $response = (new FoundationTestAuthorizeTraitClass)->authorize([new FoundationAuthorizesRequestTestClass]);
 
-        $this->assertInstanceOf(Response::class, $response);
+        $this->assertInstanceOf('Illuminate\Auth\Access\Response', $response);
         $this->assertTrue($_SERVER['_test.authorizes.trait.policy']);
     }
 
@@ -72,7 +72,7 @@ class FoundationAuthorizesRequestsTraitTest extends PHPUnit_Framework_TestCase
         Container::setInstance($container);
 
         $gate = new Illuminate\Auth\Access\Gate($container, function () { return (object) ['id' => 1]; });
-        $container->instance(Gate::class, $gate);
+        $container->instance('Illuminate\Contracts\Auth\Access\Gate', $gate);
 
         return $gate;
     }

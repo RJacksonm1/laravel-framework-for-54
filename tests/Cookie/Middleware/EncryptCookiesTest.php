@@ -28,7 +28,7 @@ class EncryptCookiesTest extends PHPUnit_Framework_TestCase
         parent::setUp();
 
         $container = new Container;
-        $container->singleton(EncrypterContract::class, function () {
+        $container->singleton('Illuminate\Contracts\Encryption\Encrypter', function () {
             return new Encrypter(str_repeat('a', 16));
         });
 

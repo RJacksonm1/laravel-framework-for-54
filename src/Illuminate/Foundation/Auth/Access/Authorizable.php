@@ -15,7 +15,7 @@ trait Authorizable
      */
     public function can($ability, $arguments = [])
     {
-        return app(Gate::class)->forUser($this)->check($ability, $arguments);
+        return app('Illuminate\Contracts\Auth\Access\Gate')->forUser($this)->check($ability, $arguments);
     }
 
     /**

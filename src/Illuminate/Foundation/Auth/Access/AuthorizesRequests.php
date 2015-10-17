@@ -21,7 +21,7 @@ trait AuthorizesRequests
     {
         list($ability, $arguments) = $this->parseAbilityAndArguments($ability, $arguments);
 
-        return $this->authorizeAtGate(app(Gate::class), $ability, $arguments);
+        return $this->authorizeAtGate(app('Illuminate\Contracts\Auth\Access\Gate'), $ability, $arguments);
     }
 
     /**
@@ -38,7 +38,7 @@ trait AuthorizesRequests
     {
         list($ability, $arguments) = $this->parseAbilityAndArguments($ability, $arguments);
 
-        $gate = app(Gate::class)->forUser($user);
+        $gate = app('Illuminate\Contracts\Auth\Access\Gate')->forUser($user);
 
         return $this->authorizeAtGate($gate, $ability, $arguments);
     }
