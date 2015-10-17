@@ -13,7 +13,7 @@ class SupportMacroableTest extends PHPUnit_Framework_TestCase
 
     private function createObjectForTrait()
     {
-        return $this->getObjectForTrait(Macroable::class);
+        return $this->getObjectForTrait('Illuminate\Support\Traits\Macroable');
     }
 
     public function testRegisterMacro()

@@ -148,7 +148,7 @@ trait AuthenticatesUsers
     protected function isUsingThrottlesLoginsTrait()
     {
         return in_array(
-            ThrottlesLogins::class, class_uses_recursive(get_class($this))
+            'Illuminate\Foundation\Auth\ThrottlesLogins', class_uses_recursive(get_class($this))
         );
     }
 }

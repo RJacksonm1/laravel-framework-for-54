@@ -13,7 +13,7 @@ class CacheRateLimiterTest extends PHPUnit_Framework_TestCase
 
     public function testTooManyAttemptsReturnTrueIfAlreadyLockedOut()
     {
-        $cache = m::mock(Cache::class);
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
         $cache->shouldReceive('get')->once()->with('key', 0)->andReturn(0);
         $cache->shouldReceive('has')->once()->with('key:lockout')->andReturn(true);
         $cache->shouldReceive('add')->never();
@@ -24,7 +24,7 @@ class CacheRateLimiterTest extends PHPUnit_Framework_TestCase
 
     public function testTooManyAttemptsReturnsTrueIfMaxAttemptsExceeded()
     {
-        $cache = m::mock(Cache::class);
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
         $cache->shouldReceive('get')->once()->with('key', 0)->andReturn(10);
         $cache->shouldReceive('has')->once()->with('key:lockout')->andReturn(false);
         $cache->shouldReceive('add')->once()->with('key:lockout', m::type('int'), 1);
@@ -35,7 +35,7 @@ class CacheRateLimiterTest extends PHPUnit_Framework_TestCase
 
     public function testHitProperlyIncrementsAttemptCount()
     {
-        $cache = m::mock(Cache::class);
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
         $cache->shouldReceive('add')->once()->with('key', 1, 1);
         $cache->shouldReceive('increment')->once()->with('key');
         $rateLimiter = new RateLimiter($cache);
@@ -45,7 +45,7 @@ class CacheRateLimiterTest extends PHPUnit_Framework_TestCase
 
     public function testClearClearsTheCacheKeys()
     {
-        $cache = m::mock(Cache::class);
+        $cache = m::mock('Illuminate\Contracts\Cache\Repository');
         $cache->shouldReceive('forget')->once()->with('key');
         $cache->shouldReceive('forget')->once()->with('key:lockout');
         $rateLimiter = new RateLimiter($cache);
