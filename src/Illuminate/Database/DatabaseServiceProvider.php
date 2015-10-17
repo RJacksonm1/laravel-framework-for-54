@@ -59,12 +59,12 @@ class DatabaseServiceProvider extends ServiceProvider
      */
     protected function registerEloquentFactory()
     {
-        $this->app->singleton(FakerGenerator::class, function () {
+        $this->app->singleton('Faker\Generator', function () {
             return FakerFactory::create();
         });
 
-        $this->app->singleton(EloquentFactory::class, function ($app) {
-            $faker = $app->make(FakerGenerator::class);
+        $this->app->singleton('Illuminate\Database\Eloquent\Factory', function ($app) {
+            $faker = $app->make('Faker\Generator');
 
             return EloquentFactory::construct($faker, database_path('factories'));
         });

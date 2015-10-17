@@ -76,14 +76,14 @@ class DatabaseEloquentSoftDeletesIntegrationTest extends PHPUnit_Framework_TestC
         $this->createUsers();
 
         $this->assertCount(2, SoftDeletesTestUser::withTrashed()->get());
-        $this->assertInstanceOf(Eloquent::class, SoftDeletesTestUser::withTrashed()->find(1));
+        $this->assertInstanceOf('Illuminate\Database\Eloquent\Model', SoftDeletesTestUser::withTrashed()->find(1));
     }
 
     public function testDeleteSetsDeletedColumn()
     {
         $this->createUsers();
 
-        $this->assertInstanceOf(Carbon::class, SoftDeletesTestUser::withTrashed()->find(1)->deleted_at);
+        $this->assertInstanceOf('Carbon\Carbon', SoftDeletesTestUser::withTrashed()->find(1)->deleted_at);
         $this->assertNull(SoftDeletesTestUser::find(2)->deleted_at);
     }
 

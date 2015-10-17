@@ -99,7 +99,7 @@ trait RouteDependencyResolverTrait
      */
     protected function vacantEloquentParameter(ReflectionClass $class, array $parameters)
     {
-        return $class->isSubclassOf(Model::class) &&
+        return $class->isSubclassOf('Illuminate\Database\Eloquent\Model') &&
              ! $this->alreadyInParameters($class->name, $parameters);
     }
 

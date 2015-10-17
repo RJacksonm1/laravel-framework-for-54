@@ -26,10 +26,10 @@ class DatabaseEloquentRelationTest extends PHPUnit_Framework_TestCase
 
     public function testTouchMethodUpdatesRelatedTimestamps()
     {
-        $builder = m::mock(Builder::class);
-        $parent = m::mock(Model::class);
+        $builder = m::mock('Illuminate\Database\Eloquent\Builder');
+        $parent = m::mock('Illuminate\Database\Eloquent\Model');
         $parent->shouldReceive('getAttribute')->with('id')->andReturn(1);
-        $builder->shouldReceive('getModel')->andReturn($related = m::mock(StdClass::class));
+        $builder->shouldReceive('getModel')->andReturn($related = m::mock('StdClass'));
         $builder->shouldReceive('whereNotNull');
         $builder->shouldReceive('where');
         $relation = new HasOne($builder, $parent, 'foreign_key', 'id');
@@ -44,7 +44,7 @@ class DatabaseEloquentRelationTest extends PHPUnit_Framework_TestCase
 
     public function testSettingMorphMapWithNumericArrayUsesTheTableNames()
     {
-        Relation::morphMap([EloquentRelationResetModelStub::class]);
+        Relation::morphMap(['EloquentRelationResetModelStub']);
 
         $this->assertEquals([
             'reset' => 'EloquentRelationResetModelStub',
@@ -62,12 +62,12 @@ class DatabaseEloquentRelationTest extends PHPUnit_Framework_TestCase
     public function testDonNotRunParentModelGlobalScopes()
     {
         /* @var Mockery\MockInterface $parent */
-        $eloquentBuilder = m::mock(Builder::class);
-        $queryBuilder = m::mock(QueryBuilder::class);
-        $parent = m::mock(EloquentRelationResetModelStub::class)->makePartial();
-        $grammar = m::mock(Grammar::class);
+        $eloquentBuilder = m::mock('Illuminate\Database\Eloquent\Builder');
+        $queryBuilder = m::mock('Illuminate\Database\Query\QueryBuilder');
+        $parent = m::mock('EloquentRelationResetModelStub')->makePartial();
+        $grammar = m::mock('Illuminate\Database\Grammar');
 
-        $eloquentBuilder->shouldReceive('getModel')->andReturn($related = m::mock(StdClass::class));
+        $eloquentBuilder->shouldReceive('getModel')->andReturn($related = m::mock('StdClass'));
         $eloquentBuilder->shouldReceive('getQuery')->andReturn($queryBuilder);
         $queryBuilder->shouldReceive('getGrammar')->andReturn($grammar);
         $grammar->shouldReceive('wrap');

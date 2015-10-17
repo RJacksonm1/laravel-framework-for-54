@@ -1,5 +1,5 @@
 {
-    "name": "laravel/framework",
+    "name": "rjacksonm1/laravel-framework-for-54",
     "description": "The Laravel Framework.",
     "keywords": ["framework", "laravel"],
     "license": "MIT",
@@ -15,7 +15,7 @@
         }
     ],
     "require": {
-        "php": ">=5.5.9",
+        "php": ">=5.4",
         "ext-mbstring": "*",
         "ext-openssl": "*",
         "classpreloader/classpreloader": "~2.0",

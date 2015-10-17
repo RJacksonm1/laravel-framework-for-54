@@ -10,7 +10,7 @@ class FoundationCrawlerTraitTest extends PHPUnit_Framework_TestCase
 
     public function setUp()
     {
-        $this->crawler = m::mock(Crawler::class)->makePartial();
+        $this->crawler = m::mock('Symfony\Component\DomCrawler\Crawler')->makePartial();
     }
 
     public function tearDown()
@@ -20,7 +20,7 @@ class FoundationCrawlerTraitTest extends PHPUnit_Framework_TestCase
 
     protected function mockInput($value)
     {
-        $input = m::mock(Crawler::class)->makePartial();
+        $input = m::mock('Symfony\Component\DomCrawler\Crawler')->makePartial();
         $input->shouldReceive('count')->andReturn(1);
         $input->shouldReceive('nodeName')->once()->andReturn('input');
         $input->shouldReceive('attr')
@@ -73,7 +73,7 @@ class FoundationCrawlerTraitTest extends PHPUnit_Framework_TestCase
 
     protected function mockTextarea($value)
     {
-        $textarea = m::mock(Crawler::class)->makePartial();
+        $textarea = m::mock('Symfony\Component\DomCrawler\Crawler')->makePartial();
         $textarea->shouldReceive('count')->andReturn(1);
         $textarea->shouldReceive('nodeName')->once()->andReturn('textarea');
         $textarea->shouldReceive('text')->once()->andReturn($value);
@@ -107,7 +107,7 @@ class FoundationCrawlerTraitTest extends PHPUnit_Framework_TestCase
      */
     public function testSeeInFieldWrongElementException()
     {
-        $select = m::mock(Crawler::class)->makePartial();
+        $select = m::mock('Symfony\Component\DomCrawler\Crawler')->makePartial();
         $select->shouldReceive('count')->andReturn(1);
         $select->shouldReceive('nodeName')->once()->andReturn('select');
 
@@ -121,13 +121,13 @@ class FoundationCrawlerTraitTest extends PHPUnit_Framework_TestCase
 
     protected function mockSelect()
     {
-        $optionEmpty = m::mock(Crawler::class)->makePartial();
+        $optionEmpty = m::mock('Symfony\Component\DomCrawler\Crawler')->makePartial();
         $optionEmpty->shouldReceive('hasAttribute')
             ->withArgs(['selected'])
             ->once()
             ->andReturn(false);
 
-        $optionFullTime = m::mock(Crawler::class)->makePartial();
+        $optionFullTime = m::mock('Symfony\Component\DomCrawler\Crawler')->makePartial();
         $optionFullTime->shouldReceive('hasAttribute')
             ->withArgs(['selected'])
             ->once()
@@ -137,7 +137,7 @@ class FoundationCrawlerTraitTest extends PHPUnit_Framework_TestCase
             ->once()
             ->andReturn('full_time');
 
-        $select = m::mock(Crawler::class)->makePartial();
+        $select = m::mock('Symfony\Component\DomCrawler\Crawler')->makePartial();
         $select->shouldReceive('count')
             ->once()
             ->andReturn(1);
@@ -173,7 +173,7 @@ class FoundationCrawlerTraitTest extends PHPUnit_Framework_TestCase
 
     protected function mockCheckbox($checked = true)
     {
-        $checkbox = m::mock(Crawler::class)->makePartial();
+        $checkbox = m::mock('Symfony\Component\DomCrawler\Crawler')->makePartial();
         $checkbox->shouldReceive('count')->andReturn(1);
         $checkbox->shouldReceive('attr')
             ->withArgs(['checked'])

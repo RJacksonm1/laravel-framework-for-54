@@ -459,7 +459,7 @@ if (! function_exists('policy')) {
      */
     function policy($class)
     {
-        return app(Gate::class)->getPolicyFor($class);
+        return app('Illuminate\Contracts\Auth\Access\Gate')->getPolicyFor($class);
     }
 }
 
