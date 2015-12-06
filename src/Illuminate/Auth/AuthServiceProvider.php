@@ -53,7 +53,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     protected function registerUserResolver()
     {
-        $this->app->bind(AuthenticatableContract::class, function ($app) {
+        $this->app->bind('Illuminate\Contracts\Auth\Authenticatable', function ($app) {
             return $app['auth']->user();
         });
     }

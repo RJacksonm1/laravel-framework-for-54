@@ -107,7 +107,7 @@ class OptimizeCommand extends Command
     protected function getClassPreloader()
     {
         // Class Preloader 3.x
-        if (class_exists(Factory::class)) {
+        if (class_exists('ClassPreloader\Factory')) {
             return (new Factory)->create(['skip' => true]);
         }
 
